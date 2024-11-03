@@ -1885,6 +1885,26 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
+@ Fake RTC macros
+
+	@ Use to advance time by a specific amount. 
+	.macro addtime days:req, hours:req, minutes:req, seconds:req
+	.byte 0xe5
+	.4byte \days 
+	.4byte \hours
+	.4byte \minutes
+	.4byte \seconds
+	.endm
+
+	@ Sets the time to a specific day, date, and time.
+	.macro settime days:req, hours:req, minutes:req, seconds:req
+	.byte 0xe6
+	.4byte \days 
+	.4byte \hours
+	.4byte \minutes
+	.4byte \seconds
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

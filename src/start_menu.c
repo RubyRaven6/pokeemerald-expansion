@@ -497,20 +497,23 @@ static void ShowTimeWindow(void)
     u8* ptr;
     u8 convertedHours;
 
+    // This allows the clock to tick forward in the menu. Comment this out to stop it.
+    RtcCalcLocalTime();
+
     // print window
     sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
     PutWindowTilemap(sStartClockWindowId);
     DrawStdWindowFrame(sStartClockWindowId, FALSE);
 
-    if (gLocalTime.hours < 12)
+    if (GetHour() < 12)
     {
-        if (gLocalTime.hours == 0)
+        if (GetHour() == 0)
             convertedHours = 12;
         else
-            convertedHours = gLocalTime.hours;
+            convertedHours = GetHour();
         suffix = gText_AM;
     }
-    else if (gLocalTime.hours == 12)
+    else if (GetHour() == 12)
     {
         convertedHours = 12;
         if (suffix == gText_AM);
@@ -518,7 +521,7 @@ static void ShowTimeWindow(void)
     }
     else
     {
-        convertedHours = gLocalTime.hours - 12;
+        convertedHours = GetHour() - 12;
         suffix = gText_PM;
     }
 

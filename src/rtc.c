@@ -342,6 +342,34 @@ void RtcInitLocalTimeOffset(s32 hour, s32 minute)
     RtcCalcLocalTimeOffset(0, hour, minute, 0);
 }
 
+u8 GetSecond(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.second);
+}
+
+u8 GetMinute(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.minute);
+}
+
+u8 GetHour(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.hour);
+}
+
+u8 GetDayOfWeek(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.dayOfWeek);
+}
+
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
 {
     gLocalTime.days = days;

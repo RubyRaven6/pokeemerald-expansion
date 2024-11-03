@@ -1,9 +1,13 @@
 # Fake RTC Suite
 This feature branch aims to expand utilization for Fake RTC.
-### Start Menu Clock
+- Highlights ratio area for custom time in fake_rtc.c
+- Added two macros: `addtime` and `settime`
+    - `addtime`: adds a specific amount of time.
+    - `settime`: sets the time from to a specified date and/or time.
 
-_Written for pokeemerald-expansion 1.7.X_
+## Credits: 
+Pawkkie for the [Start Menu Clock](https://github.com/Pawkkie/pokeemerald-expansion/assets/61265402/2cf0306f-e367-4208-ba41-1fdcf26aab32)
 
-Adds a clock that tracks the in-game time to the start menu, as seen below. There are comments in the branch if you're interested in full day names vs shortened day names.
+Mako for figuring out the changes in fake_rtc.c that allowed the clock to read the Fake RTC.
 
-![Start Menu Clock](https://github.com/Pawkkie/pokeemerald-expansion/assets/61265402/2cf0306f-e367-4208-ba41-1fdcf26aab32)
+RavePossum for helping in writing the macro code.

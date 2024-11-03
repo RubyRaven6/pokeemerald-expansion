@@ -32,15 +32,16 @@ void FakeRtc_TickTimeForward(void)
     if (FlagGet(OW_FLAG_PAUSE_TIME))
         return;
 
-    FakeRtc_AdvanceTimeBy(0, 0, FakeRtc_GetSecondsRatio());
+    FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
 }
 
-void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
+void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
 {
     struct Time* time = FakeRtc_GetCurrentTime();
     seconds += time->seconds;
     minutes += time->minutes;
     hours += time->hours;
+    days += time->days;
 
     while(seconds >= SECONDS_PER_MINUTE)
     {
@@ -63,27 +64,31 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
     time->seconds = seconds;
     time->minutes = minutes;
     time->hours = hours;
+    time->days = days;
 }
 
-void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
+void FakeRtc_ManuallySetTime(u32 dayOfWeek, u32 hour, u32 minute, u32 second)
 {
     struct Time diff, target;
     RtcCalcLocalTime();
 
+    target.days = dayOfWeek;
     target.hours = hour;
     target.minutes = minute;
     target.seconds = second;
-    target.days = gLocalTime.days;
 
     CalcTimeDifference(&diff, &gLocalTime, &target);
-    FakeRtc_AdvanceTimeBy(diff.hours, diff.minutes, diff.seconds);
+    FakeRtc_AdvanceTimeBy(diff.days, diff.hours, diff.minutes, diff.seconds);
 }
+
+// Edit RTC_CUSTOM to edit the custom ratio
 
 u32 FakeRtc_GetSecondsRatio(void)
 {
-    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA) ? 60 :
-           (OW_ALTERED_TIME_RATIO == GEN_9)     ? 20 :
-                                                  1;
+    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA)      ? 60 :
+           (OW_ALTERED_TIME_RATIO == GEN_9)          ? 20 :
+           (OW_ALTERED_TIME_RATIO == RTC_CUSTOM)     ? 10 :
+                                                       1;
 }
 
 STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustBeTrueToPauseTime);

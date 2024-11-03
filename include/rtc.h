@@ -120,4 +120,8 @@ u32 RtcGetMinuteCount(void);
 u32 RtcGetLocalDayCount(void);
 void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
 
+u8 GetHour(void);
+u8 GetMinute(void);
+u8 GetDayOfWeek(void);
+
 #endif // GUARD_RTC_UTIL_H

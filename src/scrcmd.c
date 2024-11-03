@@ -2472,3 +2472,31 @@ void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 {
     sIsScriptedWildDouble = TRUE;
 }
+
+//This is the command which adds time to the 
+#include "fake_rtc.h"
+bool8 ScrCmd_addtime(struct ScriptContext *ctx)
+{
+    u32 days = ScriptReadWord(ctx);
+    u32 hours = ScriptReadWord(ctx);
+    u32 minutes = ScriptReadWord(ctx);
+    u32 seconds = ScriptReadWord(ctx);
+
+    FakeRtc_AdvanceTimeBy(days, hours, minutes, seconds);
+
+    return FALSE;
+    
+}
+
+bool8 ScrCmd_settime(struct ScriptContext *ctx)
+{
+    u32 dayOfWeek = ScriptReadWord(ctx);
+    u32 hours = ScriptReadWord(ctx);
+    u32 minutes = ScriptReadWord(ctx);
+    u32 seconds = ScriptReadWord(ctx);
+
+    FakeRtc_ManuallySetTime(dayOfWeek, hours, minutes, seconds);
+
+    return FALSE;
+    
+}
