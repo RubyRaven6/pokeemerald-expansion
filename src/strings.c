@@ -1878,7 +1878,7 @@ const u8 gText_CurrentTimeAM[] = _("Time: {STR_VAR_1}:{STR_VAR_2} AM");
 const u8 gText_CurrentTimeAMOff[] = _("Time: {STR_VAR_1} {STR_VAR_2} AM");
 const u8 gText_CurrentTimePM[] = _("Time: {STR_VAR_1}:{STR_VAR_2} PM");
 const u8 gText_CurrentTimePMOff[] = _("Time: {STR_VAR_1} {STR_VAR_2} PM");
-const u8 gText_Date[] = _("{STR_VAR_1} {STR_VAR_2}, {STR_VAR_3}");
+const u8 gText_Date[] = _("MONTH: {STR_VAR_1}, DAY: {STR_VAR_2}, YEAR: {STR_VAR_3}");
 
 const u8 *const gDayNameStringsTable[7] = {
     [DAY_SUNDAY] = gText_Sunday,

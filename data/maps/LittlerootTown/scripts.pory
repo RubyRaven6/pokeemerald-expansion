@@ -1045,3 +1045,31 @@ script LittlerootTown_EventScript_IncreaseBy1Day{
     addtime(0, 0, 1, 0, 0, 0)
     end    
 }
+
+script LittlerootTown_EventScript_IncreaseBy1Month{
+    msgbox(format("This increases time by 1 month."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    addtime(0, 1, 0, 0, 0, 0)
+    end    
+}
+
+script LittlerootTown_EventScript_IncreaseBy1Year{
+    msgbox(format("This increases time by 1 year."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    addtime(1, 0, 0, 0, 0, 0)
+    end    
+}
+
+script LittlerootTown_EventScript_PrintTime{
+	gettime 
+	msgbox(Text_DateStrings, MSGBOX_DEFAULT)
+	waitmessage
+	closemessage
+	end
+}
+
+text Text_DateStrings{
+	format("MONTH: {STR_VAR_1}, DAY: {STR_VAR_2}, YEAR:{STR_VAR_3}")
+}

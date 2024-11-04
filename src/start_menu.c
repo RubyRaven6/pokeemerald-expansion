@@ -157,7 +157,7 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
     .tilemapLeft = 1, 
     .tilemapTop = 1, 
     .width = 13, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
-    .height = 4, 
+    .height = 2, 
     .paletteNum = 15,
     .baseBlock = 0x30
 };
@@ -475,6 +475,7 @@ static void ShowPyramidFloorWindow(void)
 
 static void ShowTimeWindow(void)
 {
+
     const u8 *suffix;
     u8* ptr;
     u8 convertedHours;

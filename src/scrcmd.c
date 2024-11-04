@@ -43,6 +43,7 @@
 #include "shop.h"
 #include "slot_machine.h"
 #include "sound.h"
+#include "strings.h"
 #include "string_util.h"
 #include "text.h"
 #include "text_window.h"
@@ -709,6 +710,10 @@ bool8 ScrCmd_gettime(struct ScriptContext *ctx)
     gSpecialVar_0x8003 = gLocalTime.dayOfWeek;
     gSpecialVar_0x8004 = gLocalTime.months;
     gSpecialVar_0x8005 = gLocalTime.years;
+
+    StringCopy(gStringVar1, gMonthNameStringsTable[gLocalTime.months]);
+    ConvertIntToDecimalStringN(gStringVar2, gLocalTime.days, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, gLocalTime.years, STR_CONV_MODE_RIGHT_ALIGN, 2);
     return FALSE;
 }
 
