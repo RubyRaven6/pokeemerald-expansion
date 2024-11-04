@@ -2049,7 +2049,7 @@ LittlerootTown_EventScript_IncreaseBy15Mins::
 # 1028 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1029 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 0, 15, 0
+	addtime 0, 0, 0, 0, 15, 0
 	end
 
 
@@ -2061,7 +2061,7 @@ LittlerootTown_EventScript_IncreaseBy1Hour::
 # 1036 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1037 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 1, 0, 0
+	addtime 0, 0, 0, 1, 0, 0
 	end
 
 
@@ -2073,112 +2073,8 @@ LittlerootTown_EventScript_IncreaseBy1Day::
 # 1044 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1045 "data/maps/LittlerootTown/scripts.pory"
-	addtime 1, 0, 0, 0
+	addtime 0, 0, 1, 0, 0, 0
 	end
-
-
-LittlerootTown_EventScript_SetToMonday::
-# 1050 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_SetToMonday_Text_0, MSGBOX_DEFAULT
-# 1051 "data/maps/LittlerootTown/scripts.pory"
-	waitmessage
-# 1052 "data/maps/LittlerootTown/scripts.pory"
-	closemessage
-# 1053 "data/maps/LittlerootTown/scripts.pory"
-	settime 1, 0, 0, 0
-	end
-
-
-LittlerootTown_EventScript_ChooseWhatToSet::
-# 1058 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_0, MSGBOX_DEFAULT
-# 1059 "data/maps/LittlerootTown/scripts.pory"
-	waitmessage
-# 1060 "data/maps/LittlerootTown/scripts.pory"
-	closemessage
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	dynmultichoice 10, 0, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, LittlerootTown_EventScript_ChooseWhatToSet_Text_1, LittlerootTown_EventScript_ChooseWhatToSet_Text_2, LittlerootTown_EventScript_ChooseWhatToSet_Text_3, LittlerootTown_EventScript_ChooseWhatToSet_Text_4, LittlerootTown_EventScript_ChooseWhatToSet_Text_5, LittlerootTown_EventScript_ChooseWhatToSet_Text_6, LittlerootTown_EventScript_ChooseWhatToSet_Text_7
-# 1062 "data/maps/LittlerootTown/scripts.pory"
-	switch VAR_RESULT
-# 1063 "data/maps/LittlerootTown/scripts.pory"
-	case 0, LittlerootTown_EventScript_ChooseWhatToSet_3
-# 1068 "data/maps/LittlerootTown/scripts.pory"
-	case 1, LittlerootTown_EventScript_ChooseWhatToSet_4
-# 1073 "data/maps/LittlerootTown/scripts.pory"
-	case 2, LittlerootTown_EventScript_ChooseWhatToSet_5
-# 1078 "data/maps/LittlerootTown/scripts.pory"
-	case 3, LittlerootTown_EventScript_ChooseWhatToSet_6
-# 1083 "data/maps/LittlerootTown/scripts.pory"
-	case 4, LittlerootTown_EventScript_ChooseWhatToSet_7
-# 1088 "data/maps/LittlerootTown/scripts.pory"
-	case 5, LittlerootTown_EventScript_ChooseWhatToSet_8
-# 1093 "data/maps/LittlerootTown/scripts.pory"
-	case 6, LittlerootTown_EventScript_ChooseWhatToSet_9
-LittlerootTown_EventScript_ChooseWhatToSet_1:
-	end
-
-LittlerootTown_EventScript_ChooseWhatToSet_3:
-# 1064 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1065 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-# 1066 "data/maps/LittlerootTown/scripts.pory"
-	settime 2, 0, 0, 0
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_4:
-# 1069 "data/maps/LittlerootTown/scripts.pory"
-	settime 3, 0, 0, 0
-# 1070 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1071 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_5:
-# 1074 "data/maps/LittlerootTown/scripts.pory"
-	settime 4, 0, 0, 0
-# 1075 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1076 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_6:
-# 1079 "data/maps/LittlerootTown/scripts.pory"
-	settime 5, 0, 0, 0
-# 1080 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1081 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_7:
-# 1084 "data/maps/LittlerootTown/scripts.pory"
-	settime 6, 0, 0, 0
-# 1085 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1086 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_8:
-# 1089 "data/maps/LittlerootTown/scripts.pory"
-	settime 7, 0, 0, 0
-# 1090 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1091 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
-
-LittlerootTown_EventScript_ChooseWhatToSet_9:
-# 1094 "data/maps/LittlerootTown/scripts.pory"
-	settime 1, 0, 0, 0
-# 1095 "data/maps/LittlerootTown/scripts.pory"
-	buffernumberstring STR_VAR_1, VAR_RESULT
-# 1096 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_ChooseWhatToSet_Text_8, MSGBOX_AUTOCLOSE
-	goto LittlerootTown_EventScript_ChooseWhatToSet_1
 
 
 LittlerootTown_EventScript_IncreaseBy15Mins_Text_0:
@@ -2192,44 +2088,3 @@ LittlerootTown_EventScript_IncreaseBy1Hour_Text_0:
 LittlerootTown_EventScript_IncreaseBy1Day_Text_0:
 # 1042 "data/maps/LittlerootTown/scripts.pory"
 	.string "This increases time by 1 day.$"
-
-LittlerootTown_EventScript_SetToMonday_Text_0:
-# 1050 "data/maps/LittlerootTown/scripts.pory"
-	.string "This increases sets the time to Sunday.$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_0:
-# 1058 "data/maps/LittlerootTown/scripts.pory"
-	.string "This increases sets the time to a\n"
-	.string "selected time and date.$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_1:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Sunday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_2:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Monday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_3:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Tuesday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_4:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Wednesday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_5:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Thursday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_6:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Friday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_7:
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	.string "Saturday$"
-
-LittlerootTown_EventScript_ChooseWhatToSet_Text_8:
-# 1065 "data/maps/LittlerootTown/scripts.pory"
-	.string "{STR_VAR_1}$"

@@ -65,7 +65,7 @@ static void UpdatePerMinute(struct Time *localTime)
     int minutes;
 
     CalcTimeDifference(&difference, &gSaveBlock2Ptr->lastBerryTreeUpdate, localTime);
-    minutes = 24 * 60 * difference.days + 60 * difference.hours + difference.minutes;
+    minutes = 12 * 30 * 24 * 60 * difference.years + 28 * 24 * 60 * difference.days + 60 * difference.hours + difference.minutes;
     if (minutes != 0)
     {
         if (minutes >= 0)

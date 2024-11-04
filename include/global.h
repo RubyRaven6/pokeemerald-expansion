@@ -170,10 +170,36 @@ struct UCoords32
 struct Time
 {
     /*0x00*/ s16 days;
-    /*0x02*/ s8 hours;
-    /*0x03*/ s8 minutes;
-    /*0x04*/ s8 seconds;
+    /*0x02*/  s8 hours;
+    /*0x03*/  s8 minutes;
+    /*0x04*/  s8 seconds;
+    /*0x05*/  s8 dayOfWeek;
+    /*0x06*/  s8 months;
+    /*0x07*/  s8 years; 
 };
+
+#define DAY_SUNDAY          0
+#define DAY_MONDAY          1
+#define DAY_TUESDAY         2
+#define DAY_WEDNESDAY       3
+#define DAY_THURSDAY        4
+#define DAY_FRIDAY          5
+#define DAY_SATURDAY        6
+#define DAYS_PER_WEEK       DAY_SATURDAY + 1
+
+#define    MONTH_JAN        1
+#define    MONTH_FEB        2
+#define    MONTH_MAR        3
+#define    MONTH_APR        4
+#define    MONTH_MAY        5
+#define    MONTH_JUN        6
+#define    MONTH_JUL        7
+#define    MONTH_AUG        8
+#define    MONTH_SEP        9
+#define    MONTH_OCT        10
+#define    MONTH_NOV        11
+#define    MONTH_DEC        12
+#define    MONTH_COUNT      MONTH_DEC
 
 
 struct SaveBlock3
@@ -1006,6 +1032,7 @@ struct SaveBlock1
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
     /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
+    /*0x989*/ u8 initialVBlank;
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[6];

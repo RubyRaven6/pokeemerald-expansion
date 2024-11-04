@@ -113,13 +113,16 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 void RtcCalcLocalTime(void);
 bool8 IsBetweenHours(s32 hours, s32 begin, s32 end);
 u8 GetTimeOfDay(void);
-void RtcInitLocalTimeOffset(s32 hour, s32 minute);
-void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
+void RtcInitLocalTimeOffset(s32 years, s32 months, s32 days, s32 hours, s32 minutes, s32 seconds);
+void RtcCalcLocalTimeOffset(s32 years, s32 months, s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
 u32 RtcGetMinuteCount(void);
 u32 RtcGetLocalDayCount(void);
 void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
 
+u8 GetYear(void);
+u8 GetMonth(void);
+u8 GetDay(void);
 u8 GetHour(void);
 u8 GetMinute(void);
 u8 GetDayOfWeek(void);

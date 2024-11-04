@@ -690,7 +690,7 @@ bool8 ScrCmd_initclock(struct ScriptContext *ctx)
     u8 hour = VarGet(ScriptReadHalfword(ctx));
     u8 minute = VarGet(ScriptReadHalfword(ctx));
 
-    RtcInitLocalTimeOffset(hour, minute);
+    RtcInitLocalTimeOffset(1, 1, 1, hour, minute, 0);
     return FALSE;
 }
 
@@ -706,6 +706,9 @@ bool8 ScrCmd_gettime(struct ScriptContext *ctx)
     gSpecialVar_0x8000 = gLocalTime.hours;
     gSpecialVar_0x8001 = gLocalTime.minutes;
     gSpecialVar_0x8002 = gLocalTime.seconds;
+    gSpecialVar_0x8003 = gLocalTime.dayOfWeek;
+    gSpecialVar_0x8004 = gLocalTime.months;
+    gSpecialVar_0x8005 = gLocalTime.years;
     return FALSE;
 }
 
@@ -2477,12 +2480,14 @@ void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 #include "fake_rtc.h"
 bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 {
+    u32 years = ScriptReadWord(ctx);
+    u32 months = ScriptReadWord(ctx);
     u32 days = ScriptReadWord(ctx);
     u32 hours = ScriptReadWord(ctx);
     u32 minutes = ScriptReadWord(ctx);
     u32 seconds = ScriptReadWord(ctx);
 
-    FakeRtc_AdvanceTimeBy(days, hours, minutes, seconds);
+    FakeRtc_AdvanceTimeBy(years, months, days, hours, minutes, seconds);
 
     return FALSE;
     
@@ -2490,12 +2495,14 @@ bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 
 bool8 ScrCmd_settime(struct ScriptContext *ctx)
 {
-    u32 dayOfWeek = ScriptReadWord(ctx);
-    u32 hours = ScriptReadWord(ctx);
-    u32 minutes = ScriptReadWord(ctx);
-    u32 seconds = ScriptReadWord(ctx);
+    u32 year = ScriptReadWord(ctx);
+    u32 month = ScriptReadWord(ctx);
+    u32 day = ScriptReadWord(ctx);
+    u32 hour = ScriptReadWord(ctx);
+    u32 minute = ScriptReadWord(ctx);
+    u32 second = ScriptReadWord(ctx);
 
-    FakeRtc_ManuallySetTime(dayOfWeek, hours, minutes, seconds);
+    FakeRtc_ManuallySetTime(year, month, day, hour, minute, second);
 
     return FALSE;
     

@@ -157,7 +157,7 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
     .tilemapLeft = 1, 
     .tilemapTop = 1, 
     .width = 13, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
-    .height = 2, 
+    .height = 4, 
     .paletteNum = 15,
     .baseBlock = 0x30
 };
@@ -473,24 +473,6 @@ static void ShowPyramidFloorWindow(void)
 // If you want to shorten the dates to Sat., Sun., etc., change this to 70
 #define CLOCK_WINDOW_WIDTH 104
 
-const u8 gText_Saturday[] = _("Saturday,");
-const u8 gText_Sunday[] = _("Sunday,");
-const u8 gText_Monday[] = _("Monday,");
-const u8 gText_Tuesday[] = _("Tuesday,");
-const u8 gText_Wednesday[] = _("Wednesday,");
-const u8 gText_Thursday[] = _("Thursday,");
-const u8 gText_Friday[] = _("Friday,");
-
-const u8 *const gDayNameStringsTable[7] = {
-    gText_Saturday,
-    gText_Sunday,
-    gText_Monday,
-    gText_Tuesday,
-    gText_Wednesday,
-    gText_Thursday,
-    gText_Friday,
-};
-
 static void ShowTimeWindow(void)
 {
     const u8 *suffix;
@@ -525,14 +507,13 @@ static void ShowTimeWindow(void)
         suffix = gText_PM;
     }
 
-    StringExpandPlaceholders(gStringVar4, gDayNameStringsTable[(gLocalTime.days % 7)]);
+    StringExpandPlaceholders(gStringVar4, gDayNameStringsTable[GetDayOfWeek()]);
     // StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime); // prints "time" word, from version before weekday was added and leaving it here in case anyone would prefer to use it
     AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL); 
-
     ptr = ConvertIntToDecimalStringN(gStringVar4, convertedHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
 
-    ConvertIntToDecimalStringN(ptr + 1, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(ptr + 1, GetMinute(), STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, suffix, CLOCK_WINDOW_WIDTH) - (CLOCK_WINDOW_WIDTH - GetStringRightAlignXOffset(1, gStringVar4, CLOCK_WINDOW_WIDTH) + 3), 1, 0xFF, NULL); // print time
 
     AddTextPrinterParameterized(sStartClockWindowId, 1, suffix, GetStringRightAlignXOffset(1, suffix, CLOCK_WINDOW_WIDTH), 1, 0xFF, NULL); // print am/pm
