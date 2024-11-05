@@ -711,6 +711,10 @@ bool8 ScrCmd_gettime(struct ScriptContext *ctx)
     gSpecialVar_0x8004 = gLocalTime.months;
     gSpecialVar_0x8005 = gLocalTime.years;
 
+    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.months);
+    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.days);
+    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.years);
+
     StringCopy(gStringVar1, gMonthNameStringsTable[gLocalTime.months]);
     ConvertIntToDecimalStringN(gStringVar2, gLocalTime.days, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar3, gLocalTime.years, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -2512,3 +2516,4 @@ bool8 ScrCmd_settime(struct ScriptContext *ctx)
     return FALSE;
     
 }
+

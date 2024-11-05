@@ -1,3 +1,5 @@
+tools/*/LICENSE
+README.md
 *.exe
 *.o
 *.i
