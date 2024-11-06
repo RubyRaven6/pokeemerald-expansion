@@ -1909,6 +1909,38 @@
 	.4byte \seconds
 	.endm
 
+	@@ Specific Time Unit macros
+	@ Adds a number of years to the current time.
+	.macro addyear years:req
+	.byte 0xe7
+	.4byte \years
+	.endm
+
+	@ Adds a number of months to the current time.
+	.macro addmonth months:req
+	.byte 0xe8
+	.4byte \months
+	.endm
+
+	@ Adds a number of days to the current time.
+	.macro addday days:req
+	.byte 0xe9
+	.4byte \days
+	.endm
+
+	@ Adds a number of hours to the current time.
+	.macro addhour hours:req
+	.byte 0xea
+	.4byte \hours
+	.endm
+
+	@ Adds a number of minutes to the current time.
+	.macro addminute minutes:req
+	.byte 0xeb
+	.4byte \minutes
+	.endm
+
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

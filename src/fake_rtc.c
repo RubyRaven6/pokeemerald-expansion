@@ -17,7 +17,7 @@ struct Time *FakeRtc_GetCurrentTime(void)
 
 void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)
 {
-    struct Time* time = FakeRtc_GetCurrentTime();
+    struct Time *time = FakeRtc_GetCurrentTime();
     rtc->second = time->seconds;
     rtc->minute = time->minutes;
     rtc->hour = time->hours;
@@ -84,6 +84,7 @@ void FakeRtc_AdvanceTimeBy(u32 years, u32 months, u32 days, u32 hours, u32 minut
         time->months += MONTHS_PER_YEAR;
         --time->years;
     }
+
     u32 dayOfWeek = time->dayOfWeek + days;
     seconds += time->seconds;
     minutes += time->minutes;
@@ -137,21 +138,43 @@ void FakeRtc_AdvanceTimeBy(u32 years, u32 months, u32 days, u32 hours, u32 minut
     time->dayOfWeek = dayOfWeek;
 }
 
+
 void FakeRtc_ManuallySetTime(u32 year, u32 month, u32 day, u32 hour, u32 minute, u32 second)
 {
-    struct Time diff, target;
-    RtcCalcLocalTime();
 
-    target.years = year;
-    target.months = month;
-    target.days = day;
-    target.hours = hour;
-    target.minutes = minute;
-    target.seconds = second;
+    memset(FakeRtc_GetCurrentTime(), 0, sizeof(struct Time));
+    struct Time* setTime = FakeRtc_GetCurrentTime();
+    u8 weekday = ((day - 1) % 7);
 
-    CalcTimeDifference(&diff, &gLocalTime, &target);
-    FakeRtc_AdvanceTimeBy(diff.years, diff.months, diff.days, diff.hours, diff.minutes, diff.seconds);
+    FlagToggle(OW_FLAG_PAUSE_TIME);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Seconds: %u", setTime->seconds);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Minutes: %u", setTime->minutes);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Hours: %u", setTime->hours);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Days: %u", setTime->days);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Day of week: %u", setTime->dayOfWeek);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Months: %u", setTime->months);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Years: %u", setTime->years);
+
+    setTime->years = year;
+    setTime->months = month;
+    setTime->days = day; 
+    setTime->hours = hour;
+    setTime->minutes = minute;
+    setTime->seconds = second;
+    setTime->dayOfWeek = weekday;
+
+    MgbaPrintf(MGBA_LOG_DEBUG, "Seconds after: %u", setTime->seconds);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Minutes after: %u", setTime->minutes);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Hours after: %u", setTime->hours);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Days after: %u", setTime->days);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Day of week: %u", setTime->dayOfWeek);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Months after: %u", setTime->months);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Years after: %u", setTime->years);
+    FlagToggle(OW_FLAG_PAUSE_TIME);
 }
+
+
+
 
 // Edit RTC_CUSTOM to edit the custom ratio
 u32 FakeRtc_GetSecondsRatio(void)

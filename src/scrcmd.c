@@ -16,6 +16,7 @@
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
+#include "fake_rtc.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -703,21 +704,26 @@ bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
-    RtcCalcLocalTime();
-    gSpecialVar_0x8000 = gLocalTime.hours;
-    gSpecialVar_0x8001 = gLocalTime.minutes;
-    gSpecialVar_0x8002 = gLocalTime.seconds;
-    gSpecialVar_0x8003 = gLocalTime.dayOfWeek;
-    gSpecialVar_0x8004 = gLocalTime.months;
-    gSpecialVar_0x8005 = gLocalTime.years;
+    struct Time *time = FakeRtc_GetCurrentTime();
+    gSpecialVar_0x8000 = time->hours;
+    gSpecialVar_0x8001 = time->minutes;
+    gSpecialVar_0x8002 = time->seconds;
+    gSpecialVar_0x8003 = time->dayOfWeek;
+    gSpecialVar_0x8004 = time->months;
+    gSpecialVar_0x8005 = time->years;
 
-    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.months);
-    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.days);
-    MgbaPrintf(MGBA_LOG_DEBUG, "%u", gLocalTime.years);
+    FlagToggle(OW_FLAG_PAUSE_TIME);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Seconds: %u", time->seconds);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Minutes: %u", time->minutes);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Hours: %u", time->hours);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Days: %u", time->days);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Months: %u", time->months);
+    MgbaPrintf(MGBA_LOG_DEBUG, "Years: %u", time->years);
+    FlagToggle(OW_FLAG_PAUSE_TIME);
 
-    StringCopy(gStringVar1, gMonthNameStringsTable[gLocalTime.months]);
-    ConvertIntToDecimalStringN(gStringVar2, gLocalTime.days, STR_CONV_MODE_LEADING_ZEROS, 2);
-    ConvertIntToDecimalStringN(gStringVar3, gLocalTime.years, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    StringCopy(gStringVar1, gMonthNameStringsTable[time->months]);
+    ConvertIntToDecimalStringN(gStringVar2, time->days, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, time->years, STR_CONV_MODE_RIGHT_ALIGN, 2);
     return FALSE;
 }
 
@@ -2486,7 +2492,7 @@ void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 }
 
 //This is the command which adds time to the 
-#include "fake_rtc.h"
+
 bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 {
     u32 years = ScriptReadWord(ctx);
@@ -2495,7 +2501,7 @@ bool8 ScrCmd_addtime(struct ScriptContext *ctx)
     u32 hours = ScriptReadWord(ctx);
     u32 minutes = ScriptReadWord(ctx);
     u32 seconds = ScriptReadWord(ctx);
-
+   
     FakeRtc_AdvanceTimeBy(years, months, days, hours, minutes, seconds);
 
     return FALSE;
@@ -2512,8 +2518,70 @@ bool8 ScrCmd_settime(struct ScriptContext *ctx)
     u32 second = ScriptReadWord(ctx);
 
     FakeRtc_ManuallySetTime(year, month, day, hour, minute, second);
-
     return FALSE;
-    
 }
 
+bool8 ScrCmd_addyear(struct ScriptContext *ctx)
+{
+    u32 year = ScriptReadWord(ctx);
+    u32 month = 0;
+    u32 day = 0;
+    u32 hour = 0;
+    u32 minute = 0;
+    u32 second = 0;
+
+    FakeRtc_AdvanceTimeBy(year, month, day, hour, minute, second);
+    return FALSE;
+}
+
+bool8 ScrCmd_addmonth(struct ScriptContext *ctx)
+{
+    u32 year = 0;
+    u32 month = ScriptReadWord(ctx);
+    u32 day = 0;
+    u32 hour = 0;
+    u32 minute = 0;
+    u32 second = 0;
+
+    FakeRtc_AdvanceTimeBy(year, month, day, hour, minute, second);
+    return FALSE;
+}
+
+bool8 ScrCmd_addday(struct ScriptContext *ctx)
+{
+    u32 year = 0;
+    u32 month = 0;
+    u32 day = ScriptReadWord(ctx);
+    u32 hour = 0;
+    u32 minute = 0;
+    u32 second = 0;
+
+    FakeRtc_AdvanceTimeBy(year, month, day, hour, minute, second);
+    return FALSE;
+}
+
+bool8 ScrCmd_addhour(struct ScriptContext *ctx)
+{
+    u32 year = 0;
+    u32 month = 0;
+    u32 day = 0;
+    u32 hour = ScriptReadWord(ctx);
+    u32 minute = 0;
+    u32 second = 0;
+
+    FakeRtc_AdvanceTimeBy(year, month, day, hour, minute, second);
+    return FALSE;
+}
+
+bool8 ScrCmd_addminute(struct ScriptContext *ctx)
+{
+    u32 year = 0;
+    u32 month = 0;
+    u32 day = 0;
+    u32 hour = 0;
+    u32 minute = ScriptReadWord(ctx);
+    u32 second = 0;
+
+    FakeRtc_AdvanceTimeBy(year, month, day, hour, minute, second);
+    return FALSE;
+}

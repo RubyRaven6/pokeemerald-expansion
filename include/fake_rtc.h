@@ -9,5 +9,13 @@ void FakeRtc_AdvanceTimeBy(u32 years, u32 months, u32 days, u32 hours, u32 minut
 void FakeRtc_ManuallySetTime(u32 years, u32 months, u32 day, u32 hour, u32 minute, u32 second);
 void FakeRtc_TickTimeForward(void);
 u32 FakeRtc_GetSecondsRatio(void);
+void FakeRtc_CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
+
+u8 GetYear(void);
+u8 GetMonth(void);
+u8 GetDay(void);
+u8 GetHour(void);
+u8 GetMinute(void);
+u8 GetDayOfWeek(void);
 
 #endif // GUARD_FAKE_RTC_UTIL_H

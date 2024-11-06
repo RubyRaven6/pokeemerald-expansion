@@ -439,6 +439,10 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
         result->months += MONTHS_PER_YEAR;
         --result->years;
     }
+    if (result->years < 1)
+    {
+        result->years = 1;
+    }
 }
 
 u32 RtcGetMinuteCount(void)

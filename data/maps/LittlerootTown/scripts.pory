@@ -1026,7 +1026,7 @@ script LittlerootTown_EventScript_IncreaseBy15Mins{
     msgbox(format("This increases time by 15 minutes."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    addtime(0, 0, 0, 0, 15, 0)
+    addminute(15)
     end
 }
 
@@ -1034,7 +1034,7 @@ script LittlerootTown_EventScript_IncreaseBy1Hour{
     msgbox(format("This increases time by 1 hour."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    addtime(0, 0, 0, 1, 0, 0)
+    addhour(1)
     end
 }
 
@@ -1042,7 +1042,7 @@ script LittlerootTown_EventScript_IncreaseBy1Day{
     msgbox(format("This increases time by 1 day."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    addtime(0, 0, 1, 0, 0, 0)
+	addday(1)
     end    
 }
 
@@ -1050,7 +1050,7 @@ script LittlerootTown_EventScript_IncreaseBy1Month{
     msgbox(format("This increases time by 1 month."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    addtime(0, 1, 0, 0, 0, 0)
+    addmonth(1)
     end    
 }
 
@@ -1058,9 +1058,24 @@ script LittlerootTown_EventScript_IncreaseBy1Year{
     msgbox(format("This increases time by 1 year."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    addtime(1, 0, 0, 0, 0, 0)
+    addyear(1)
     end    
 }
+
+script LittlerootTown_EventScript_AddTime{
+	msgbox(format("Sets time to 15 years, 16 months, 21 days, 10 hours, 17 minutes."), MSGBOX_DEFAULT)
+	settime(15, 16, 21, 10, 17, 0)
+	waitmessage
+	closemessage
+}
+
+script LittlerootTown_EventScript_SetTime{
+	msgbox("Setting all times to 1.", MSGBOX_DEFAULT)
+	settime(1, 1, 1, 1, 1, 1)
+	waitmessage
+	closemessage
+}
+
 
 script LittlerootTown_EventScript_PrintTime{
 	gettime 

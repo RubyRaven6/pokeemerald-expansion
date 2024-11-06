@@ -2049,7 +2049,7 @@ LittlerootTown_EventScript_IncreaseBy15Mins::
 # 1028 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1029 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 0, 0, 0, 15, 0
+	addminute 15
 	end
 
 
@@ -2061,7 +2061,7 @@ LittlerootTown_EventScript_IncreaseBy1Hour::
 # 1036 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1037 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 0, 0, 1, 0, 0
+	addhour 1
 	end
 
 
@@ -2073,7 +2073,7 @@ LittlerootTown_EventScript_IncreaseBy1Day::
 # 1044 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1045 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 0, 1, 0, 0, 0
+	addday 1
 	end
 
 
@@ -2085,7 +2085,7 @@ LittlerootTown_EventScript_IncreaseBy1Month::
 # 1052 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1053 "data/maps/LittlerootTown/scripts.pory"
-	addtime 0, 1, 0, 0, 0, 0
+	addmonth 1
 	end
 
 
@@ -2097,18 +2097,42 @@ LittlerootTown_EventScript_IncreaseBy1Year::
 # 1060 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 # 1061 "data/maps/LittlerootTown/scripts.pory"
-	addtime 1, 0, 0, 0, 0, 0
+	addyear 1
 	end
 
 
-LittlerootTown_EventScript_PrintTime::
+LittlerootTown_EventScript_AddTime::
 # 1066 "data/maps/LittlerootTown/scripts.pory"
-	gettime
+	msgbox LittlerootTown_EventScript_AddTime_Text_0, MSGBOX_DEFAULT
 # 1067 "data/maps/LittlerootTown/scripts.pory"
-	msgbox Text_DateStrings, MSGBOX_DEFAULT
+	settime 15, 16, 21, 10, 17, 0
 # 1068 "data/maps/LittlerootTown/scripts.pory"
 	waitmessage
 # 1069 "data/maps/LittlerootTown/scripts.pory"
+	closemessage
+	return
+
+
+LittlerootTown_EventScript_SetTime::
+# 1073 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_EventScript_AddTime_Text_0, MSGBOX_DEFAULT
+# 1074 "data/maps/LittlerootTown/scripts.pory"
+	settime 1, 1, 1, 1, 1, 1
+# 1075 "data/maps/LittlerootTown/scripts.pory"
+	waitmessage
+# 1076 "data/maps/LittlerootTown/scripts.pory"
+	closemessage
+	return
+
+
+LittlerootTown_EventScript_PrintTime::
+# 1081 "data/maps/LittlerootTown/scripts.pory"
+	gettime
+# 1082 "data/maps/LittlerootTown/scripts.pory"
+	msgbox Text_DateStrings, MSGBOX_DEFAULT
+# 1083 "data/maps/LittlerootTown/scripts.pory"
+	waitmessage
+# 1084 "data/maps/LittlerootTown/scripts.pory"
 	closemessage
 	end
 
@@ -2133,7 +2157,11 @@ LittlerootTown_EventScript_IncreaseBy1Year_Text_0:
 # 1058 "data/maps/LittlerootTown/scripts.pory"
 	.string "This increases time by 1 year.$"
 
+LittlerootTown_EventScript_AddTime_Text_0:
+# 1066 "data/maps/LittlerootTown/scripts.pory"
+	.string "Setting all times to 1.$"
+
 Text_DateStrings::
-# 1073 "data/maps/LittlerootTown/scripts.pory"
+# 1088 "data/maps/LittlerootTown/scripts.pory"
 	.string "MONTH: {STR_VAR_1}, DAY:\n"
 	.string "{STR_VAR_2}, YEAR:{STR_VAR_3}$"

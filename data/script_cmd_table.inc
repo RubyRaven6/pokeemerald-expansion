@@ -231,6 +231,11 @@ gScriptCmdTable::
 	.4byte ScrCmd_dynmultipush                      @ 0xe4
 	.4byte ScrCmd_addtime							@ 0xe5
 	.4byte ScrCmd_settime							@ 0xe6
+	.4byte ScrCmd_addyear							@ 0xe7
+	.4byte ScrCmd_addmonth							@ 0xe8
+	.4byte ScrCmd_addday							@ 0xe9
+	.4byte ScrCmd_addhour							@ 0xea
+	.4byte ScrCmd_addminute							@ 0xeb
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

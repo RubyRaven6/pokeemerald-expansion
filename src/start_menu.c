@@ -47,6 +47,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "fake_rtc.h"
 #include "rtc.h"
 
 // Menu actions
