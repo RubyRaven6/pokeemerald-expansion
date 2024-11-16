@@ -2,10 +2,10 @@
 This feature branch creates a system that operates practically independent of the real time clock. It also includes macros that allow developers to dynamically change the time and date within their game. If you wish to create a hack with real-time elements (i.e. tied to real-life time), do NOT use this feature branch, as it assumes you want to create an in-game time system (i.e. something more akin to Minecraft, SV, and PLA).
 
 ## Changes
-## System of Time
+### System of Time
 In its current set up, the branch has a default of 28 day months, and 12 month years. Because all the months have the same length, all Weekdays also fall under the same day every month. Lastly, the maximum amount of years a game can have is 65,535.
 
-## New Macros
+### New Macros
 - `addtime`
     - `addtime(years, month, days, hours, minutes, seconds)`
     - This macro allows you to add a number of specific units of time. For example, if you wanted to add a specific amount of time to the current time.
@@ -23,7 +23,7 @@ In its current set up, the branch has a default of 28 day months, and 12 month y
     - `addyear`, `addmonth`, `addday`, `addhour`, `addminute`
     - `setyear`, `setmonth`, `setday`, `sethour`, `setminute`
 
-## Menu Clocks integration
+### Menu Clocks integration
 It's fairly simple to integrate the In-Game clock with menu clocks, such as Pawkkie's. Simply change any references to `gLocalTime.###`, where ### is a unit such as hours (gLocalTime.hour, gLocalTime.minute), and replace it with a respective Get function. All of these can be found below:
 - GetYear()
 - GetMonth()
@@ -33,7 +33,7 @@ It's fairly simple to integrate the In-Game clock with menu clocks, such as Pawk
 - GetSecond()
 Of course, this is in any file **except** `rtc.c`.
 
-## Wallclock
+### Wallclock
 The wallclock has also been changed to reflect and manipulate the ingame time.
 
 ## Testing
