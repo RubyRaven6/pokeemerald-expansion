@@ -50,6 +50,8 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 
+extern u8 WaitingMenu[];
+
 // Menu actions
 enum
 {
@@ -67,6 +69,7 @@ enum
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
+    MENU_ACTION_WAITING_MENU
 };
 
 // Save status
@@ -109,6 +112,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
+static bool8 WaitingMenuCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -186,6 +190,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 };
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
+static const u8 sText_WaitingMenu[] = _("WAIT");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -203,6 +208,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
+    [MENU_ACTION_WAITING_MENU]    = {sText_WaitingMenu, {.u8_void = WaitingMenuCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -350,6 +356,7 @@ static void BuildNormalStartMenu(void)
     }
 
     AddStartMenuAction(MENU_ACTION_BAG);
+    AddStartMenuAction(MENU_ACTION_WAITING_MENU);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
     {
@@ -666,7 +673,8 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuExitCallback
             && gMenuCallback != StartMenuDebugCallback
             && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
+            && gMenuCallback != StartMenuBattlePyramidRetireCallback
+            && gMenuCallback != WaitingMenuCallback)
         {
            FadeScreen(FADE_TO_BLACK, 0);
         }
@@ -908,6 +916,15 @@ static bool8 StartMenuSafariZoneRetireCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenu();
     SafariZoneRetirePrompt();
+
+    return TRUE;
+}
+
+static bool8 WaitingMenuCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+    HideStartMenu();
+    ScriptContext_SetupScript(WaitingMenu);
 
     return TRUE;
 }
