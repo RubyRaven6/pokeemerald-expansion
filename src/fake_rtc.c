@@ -6,7 +6,7 @@
 #include "fake_rtc.h"
 #include "event_data.h"
 
-static void Script_ToggleFakeRtc(void);
+
 static void FakeRtc_CalcTimeDifference(struct SiiRtcInfo *result, struct Time *t1, struct SiiRtcInfo *t2);
 
 void FakeRtc_Reset(void)
@@ -114,19 +114,17 @@ void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
     Script_ToggleFakeRtc();
 }
 
-void FakeRtc_ForwardTimeTo(u32 day, u32 hour, u32 minute, u32 second)
+void FakeRtc_ForwardTimeTo(u32 hour, u32 minute, u32 second)
 {
     Script_ToggleFakeRtc();
     struct SiiRtcInfo diff, target;
-    RtcCalcLocalTime();
 
     target.hour = hour;
     target.minute = minute;
     target.second = second;
-    target.day = day;
 
     FakeRtc_CalcTimeDifference(&diff, &gLocalTime, &target);
-    FakeRtc_AdvanceTimeBy(diff.day, diff.hour, diff.minute, diff.second);
+    FakeRtc_AdvanceTimeBy(0, diff.hour, diff.minute, diff.second);
     Script_ToggleFakeRtc();
 }
 
@@ -162,16 +160,12 @@ void FakeRtc_ForceSetTime(u32 day, u32 hour, u32 minute, u32 second)
     FakeRtc_AdvanceTimeBy(day, hour, minute, second);
 }
 
-// void AdvanceScript(void)
-// {
-//     FakeRtc_AdvanceTimeBy(300, 0, 0, 0);
-// }
-
 u32 FakeRtc_GetSecondsRatio(void)
 {
-    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA) ? 60 :
-           (OW_ALTERED_TIME_RATIO == GEN_9)     ? 20 :
-                                                  1;
+    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA)   ? 60 :
+           (OW_ALTERED_TIME_RATIO == GEN_9)       ? 20 :
+           (OW_ALTERED_TIME_RATIO == TIME_DEBUG)  ?  1 :
+                                                     1;
 }
 
 STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustBeTrueToPauseTime);
@@ -186,7 +180,7 @@ void Script_ResumeFakeRtc(void)
     FlagClear(OW_FLAG_PAUSE_TIME);
 }
 
-static void Script_ToggleFakeRtc(void)
+void Script_ToggleFakeRtc(void)
 {
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
