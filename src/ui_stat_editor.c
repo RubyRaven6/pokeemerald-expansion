@@ -913,11 +913,13 @@ static void ChangeAndUpdateStat()
 #define EDITING_EVS     0
 #define EDITING_IVS     1
 
-#define LABEL_A (sStatEditorDataPtr->editingStat == ((sStatEditorDataPtr->selector_x == EDITING_EVS) ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT)))
-#define LABEL_B (sStatEditorDataPtr->selector_x == EDITING_EVS)
-#define LABEL_C (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL)
+#define CHECKS_SELECTOR_X_IF_EDITING_EVS (sStatEditorDataPtr->selector_x == EDITING_EVS)
 
-#define CHECK_IF_STAT_CANT_INCREASE ((LABEL_A || (LABEL_B && LABEL_C)))
+#define SEGMENT_A (sStatEditorDataPtr->editingStat == (CHECKS_SELECTOR_X_IF_EDITING_EVS ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT)))
+#define SEGMENT_B (sStatEditorDataPtr->selector_x == EDITING_EVS)
+#define SEGMENT_C (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL)
+
+#define CHECK_IF_STAT_CANT_INCREASE ((SEGMENT_A || (SEGMENT_B && SEGMENT_C)))
 
 static void HandleEditingStatInput(u32 input)
 {
