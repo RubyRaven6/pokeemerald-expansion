@@ -257,7 +257,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
-    - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
+    - If arm-none-eabi-gcc is **not installed**, then go to [Installing arm-none-eabi-gcc (macOS)](#installing-arm-none-eabi-gcc-macos).
     - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
 
 ### Installing libpng (macOS)
@@ -278,29 +278,21 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
 
-### Installing devkitARM (macOS)
-1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
-2. Open the package to install devkitPro pacman.
-3. In the Terminal, run the following commands to install devkitARM:
+### Installing arm-none-eabi-gcc (macOS)
+<details>
+    <summary><i>Note for advanced users...</i></summary>
+
+>   This guide installs arm-none-eabi-gcc via Homebrew as it is the easiest method, however advanced users can install arm-none-eabi-gcc through other means if they so desire.
+</details>
+
+1. Open the Terminal.
+2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
+3. Run the following command to install arm-none-eabi-gcc.
 
     ```bash
-    sudo dkp-pacman -Sy
-    sudo dkp-pacman -S gba-dev
-    sudo dkp-pacman -S devkitarm-rules
+    brew install arm-none-eabi-gcc
     ```
-
-    The command with gba-dev will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
-
-4. After the tools are installed, devkitARM must now be made accessible from anywhere by the system. To do so, run the following commands:
-
-    ```bash
-    export DEVKITPRO=/opt/devkitpro
-    echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
-    export DEVKITARM=$DEVKITPRO/devkitARM
-    echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
-
-    echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
-    ```
+    arm-none-eabi-gcc is now installed.
 
 ### Choosing where to store pokeemerald (macOS)
 At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
