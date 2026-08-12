@@ -257,7 +257,7 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
     ```
 
 2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
-    - If arm-none-eabi-gcc is **not installed**, then go to [Installing arm-none-eabi-gcc (macOS)](#installing-arm-none-eabi-gcc-macos).
+    - If gcc-arm-embedded is **not installed**, then go to [Installing gcc-arm-embedded (macOS)](#installing-gcc-arm-embedded-macos).
     - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos)
 
 ### Installing libpng (macOS)
@@ -278,21 +278,21 @@ If this works, then proceed to [Installation](#installation). Otherwise, ask for
 
     Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald (macOS)](#choosing-where-to-store-pokeemerald-macos).
 
-### Installing arm-none-eabi-gcc (macOS)
+### Installing gcc-arm-embedded (macOS)
 <details>
     <summary><i>Note for advanced users...</i></summary>
 
->   This guide installs arm-none-eabi-gcc via Homebrew as it is the easiest method, however advanced users can install arm-none-eabi-gcc through other means if they so desire.
+>   This guide installs gcc-arm-embedded via Homebrew as it is the easiest method, however advanced users can install gcc-arm-embedded through other means if they so desire.
 </details>
 
 1. Open the Terminal.
 2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
-3. Run the following command to install arm-none-eabi-gcc.
+3. Run the following command to install gcc-arm-embedded.
 
     ```bash
-    brew install arm-none-eabi-gcc
+    brew install --cask gcc-arm-embedded
     ```
-    arm-none-eabi-gcc is now installed.
+    gcc-arm-embedded is now installed.
 
 ### Choosing where to store pokeemerald (macOS)
 At this point, you can choose a folder to store pokeemerald into. If you're okay with storing pokeemerald in the user folder, then proceed to [Installation](#installation). Otherwise, you'll need to account for where pokeemerald is stored when changing directory to the pokeemerald folder.
@@ -513,7 +513,7 @@ shasum: WARNING: 1 computed checksum did NOT match
 
 ## devkitARM's C compiler
 
-This project supports the `arm-none-eabi-gcc` compiler included with devkitARM. If devkitARM (a.k.a. gba-dev) has already been installed as part of the platform-specific instructions, simply run:
+This project supports the `gcc-arm-embedded` compiler included with devkitARM. If devkitARM (a.k.a. gba-dev) has already been installed as part of the platform-specific instructions, simply run:
 ```bash
 make modern
 ```
