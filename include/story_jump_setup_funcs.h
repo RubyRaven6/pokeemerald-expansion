@@ -5,6 +5,7 @@
 
 void StoryJumpSetup_Dummy(void);
 void StoryJumpSetup_GotStarterPokemon(void);
+void StoryJumpSetup_FinishedTalkingToBirch(void);
 
 // declare your story jump setup funcs here
 

@@ -65,4 +65,9 @@ void StoryJumpSetup_GotStarterPokemon(void)
     }
 }
 
+void StoryJumpSetup_FinishedTalkingToBirch(void)
+{
+	VarSet(VAR_BIRCH_LAB_STATE, 3);
+}
+
 // define your story jump setup funcs here

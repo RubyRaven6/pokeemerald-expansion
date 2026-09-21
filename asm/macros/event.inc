@@ -2873,12 +2873,13 @@
 	braillemessage \text
 	getbraillestringwidth \text
 	call EventScript_BrailleCursorWaitButton
+	.endm
 
 	@ Starts the given cutscene which can be skipped if seen before.
-	.macro startcutscene scene:req
-	callnative StartSkippableCutscene
-	.byte \scene
-	.endm
+    .macro startcutscene scene:req
+    setvar VAR_0x8004, \scene
+    callnative StartSkippableCutscene, requests_effects=1
+    .endm
 
 	@ Ends any active cutscene, settings its seen flag.
 	.macro endcutscene

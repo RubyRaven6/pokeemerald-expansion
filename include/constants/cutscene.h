@@ -3,6 +3,7 @@
 
 enum Cutscenes
 {
+    CUTSCENE_BIRCH,
     CUTSCENE_COUNT,
 };
 
